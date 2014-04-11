@@ -71,31 +71,56 @@ describe ("AI", function(){
 
     it("returns false if there is no winning cell", function(){
       var result = ai.getWinning();
-      expect(result).toBe(false)
-    })
+      expect(result).toBe(false);
+    });
 
     it("returns the winning cell in case of a col", function(){
       board.cells[3].setValue("O");
       var result = ai.getWinning();
       expect(result.number).toEqual(6);
-    })
+    });
 
     it("returns the winning cell in case of a diagonal", function(){
-      board.cells[0].setValue("O");
       board.cells[4].setValue("O");
       var result = ai.getWinning();
       expect(result.number).toEqual(8);
+    });
+
+    it("returns the defending cell in case of row", function(){
+      board.cells[0].setValue("X");
+      board.cells[1].setValue("X");
+      var result = ai.getDefending();
+      expect(result.number).toEqual(2);
     })
 
+    it("returns the defending cell in case of diag", function(){
+      board.cells[0].setValue("X");
+      board.cells[4].setValue("X");
+      var result = ai.getDefending();
+      expect(result.number).toEqual(8);
+    })
+
+    it("returns the defending cell in case of col", function(){
+      board.cells[0].setValue("X");
+      board.cells[3].setValue("X");
+      var result = ai.getDefending();
+      expect(result.number).toEqual(6);
+    })
+
+    it ("returns false when there is no defending cell", function(){
+      var result = ai.getDefending();
+      expect(result).toBe(false);
+    });
+
 
   })
 
-  describe("Move", function(){
+  // describe("Move", function(){
 
-    it("", function(){
+  //   it("", function(){
 
-    })    
-  })
+  //   })    
+  // })
 
 
 

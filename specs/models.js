@@ -94,30 +94,24 @@ describe("Board", function(){
 
     it ("returns cells from a given column", function(){
       expect(column[index].column == randSection);
-    })
+    });
 
     it("returns 3 cells when it requests a column", function(){
       expect(column.length).toEqual(3);
-    })
+    });
 
     it("returns 3 cells from a given diagonal", function(){
-      var diagonalName = ["top-left", "top-right"][Math.floor(Math.random(2))]
-      var diagonal = board.getDiagonalCells(diagonalName)
+      var diagonalName = ["top-left", "top-right"][Math.floor(Math.random(2))];
+      var diagonal = board.getDiagonalCells(diagonalName);
       expect(diagonal.length).toEqual(3);
-    })
+    });
 
     it("returns cells from a given diagonal", function(){
-      var diagonalName = ["top-left", "top-right"][Math.floor(Math.random(2))]
-      var diagonalCellName = board.getDiagonalCells(diagonalName)[index].diagonal
+      var diagonalName = ["top-left", "top-right"][Math.floor(Math.random(2))];
+      var diagonalCellName = board.getDiagonalCells(diagonalName)[index].diagonal;
       expect(diagonalCellName.indexOf(diagonalName)).not.toEqual(-1);
-    })
-  })
-
-  describe("checking doubles in a section", function(){
-    var board = new Board();
-    board.initialize();
-    
-  })
+    });
+  });
 
   describe("getCellsWithValue", function(){
     var board = new Board();

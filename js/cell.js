@@ -3,6 +3,7 @@ var Cell = function(number){
   this.column = null;
   this.row = null;
   this.isDiagonal = false;
+  this.diagonal = "";
   var value = "empty";
 
   var self = this;
