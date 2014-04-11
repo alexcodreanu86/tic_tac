@@ -55,10 +55,10 @@ var Cell = function(number){
     }
   }
 
-  
+
 
 
 }
 
 
-module.exports = Cell;
+

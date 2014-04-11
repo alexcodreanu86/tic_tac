@@ -1,4 +1,4 @@
-var Cell = require('./cell')
+
 
 var Board = function(){
   this.cells = [];
@@ -13,6 +13,13 @@ var Board = function(){
       self.cells.push(cell);
     };
   };
+
+  this.getCell = function(number){
+    var cell = this.cells.filter(function(cell){
+      return cell.number == number
+    })
+    return cell[0]
+  }
 
   this.getRowCells = function(rowNumber){
     var row = this.cells.filter(function(cell){
@@ -39,8 +46,17 @@ var Board = function(){
     return diagonal;  
   }
 
+  this.getCellsWithValue = function(requestedValue){
+    var neededCells = this.cells.filter(function(cell){
+      return cell.getValue() == requestedValue;
+    });
+    return neededCells;
+  }
+
+
+
 }
 
 
 
-module.exports = Board;
+// module.exports = Board;

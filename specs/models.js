@@ -1,8 +1,3 @@
-// var Controller = require('./controller');
-var Board = require('./board');
-var Cell = require('./cell');
-// var AI = require('./ai');
-
 describe("Cell", function() {
   var cell;
 
@@ -60,8 +55,15 @@ describe("Board", function(){
     var board = new Board();
     board.initialize();
 
-    it ("has 9 cells in it", function(){
+    it("has 9 cells in it", function(){
       expect(board.cells.length).toEqual(9);
+    })
+
+    it("returns a desired cell", function(){
+      var cellNumber = Math.floor(Math.random() * 9);
+      var cell = board.getCell(cellNumber);
+
+      expect(cell.number).toEqual(cellNumber);
     })
   })
 
@@ -109,6 +111,24 @@ describe("Board", function(){
       var diagonalCellName = board.getDiagonalCells(diagonalName)[index].diagonal
       expect(diagonalCellName.indexOf(diagonalName)).not.toEqual(-1);
     })
+  })
+
+  describe("checking doubles in a section", function(){
+    var board = new Board();
+    board.initialize();
+    
+  })
+
+  describe("getCellsWithValue", function(){
+    var board = new Board();
+    board.initialize();
+
+    it("returns all empty cells", function(){
+      emptyCells = board.getCellsWithValue("empty")
+      playerCells = board.getCellsWithValue("X")
+      expect(emptyCells.length).toEqual(9);
+      expect(playerCells.length).toEqual(0);
+    });
   })
 
 
