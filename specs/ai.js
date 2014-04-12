@@ -19,34 +19,34 @@ describe ("AI", function(){
 
     it("checkRowDoubles returns the unique cell in a row with two other identical cells",function(){
       board.cells[1].setValue("O");
-      var winningCell = ai.checkRowDoubles(1, "O");
+      var winningCell = ai.checkRowDoubles(1, "O", "empty");
       expect(winningCell.number).toEqual(2);
     });
 
     it("checRowDoubles returns false if it doesn't find a match", function(){
-      var result = ai.checkRowDoubles(3, "O");
+      var result = ai.checkRowDoubles(3, "O", "empty");
       expect(result).toBe(false);
     })  
 
     it("checkColDoubles returns the unique cell in a collumn with two other identical cells", function(){
       board.cells[3].setValue("O");
-      var winningCell = ai.checkColDoubles(1, "O");
+      var winningCell = ai.checkColDoubles(1, "O", "empty");
       expect(winningCell.number).toEqual(6);
     });
 
     it("checkColDoubles returns false if it doesn't find a match", function(){
-      var result = ai.checkColDoubles(3, "O");
+      var result = ai.checkColDoubles(3, "O", "empty");
       expect(result).toBe(false);
     });
 
     it("checkDiagDoubles returns the unique cell in a diagonal with two other identical cells", function(){
       board.cells[4].setValue("O");
-      var winningCell = ai.checkDiagDoubles("top-left", "O");
+      var winningCell = ai.checkDiagDoubles("top-left", "O", "empty");
       expect(winningCell.number).toEqual(8);
     })
 
     it("checkDiagDoubles returns false if it doesn't find a match", function(){
-      var result = ai.checkDiagDoubles("top-right", "O");
+      var result = ai.checkDiagDoubles("top-right", "O", "empty");
       expect(result).toBe(false);
     });
   })

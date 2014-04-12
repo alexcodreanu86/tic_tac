@@ -20,7 +20,7 @@ var TicTacController = function(){
       if (nextPossibleMoves.length != 0){
         aiMove = ai.move(nextPossibleMoves);
         console.log(aiMove)
-        // aiMove.setValue("O")
+        aiMove.setValue("O")
         view.setSymbol(aiMove.number, "fa-circle-o")
       } else {
         console.log("Game Over");
