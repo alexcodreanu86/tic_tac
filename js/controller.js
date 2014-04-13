@@ -6,6 +6,7 @@ var TicTacController = function(){
 
   this.initialize = function(){
     board.initialize();
+    listenToReset();
     playerTurn();
   }
 
@@ -29,8 +30,16 @@ var TicTacController = function(){
       } else {
         view.endGame("tie")
       }
-
     })    
+  }
+
+  var listenToReset = function(){
+    $("#reset").on("click", function(){
+      board = new Board();
+      board.initialize();
+      ai = new AI(board);
+      view.resetGame();
+    })
   }
 
   var aiTurn = function(){
