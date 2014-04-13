@@ -1,5 +1,4 @@
 
-
 var TicTacController = function(){
   var board = new Board();
   var view = new TicTacView;
@@ -10,6 +9,7 @@ var TicTacController = function(){
     playerTurn();
   }
 
+
   var playerTurn = function(){
     $('body').on("click",".active", function(e){
       var cellNumber = view.findClicked(this);
@@ -19,13 +19,21 @@ var TicTacController = function(){
 
       if (nextPossibleMoves.length != 0){
         aiMove = ai.move(nextPossibleMoves);
-        console.log(aiMove)
         aiMove.setValue("O")
         view.setSymbol(aiMove.number, "fa-circle-o")
+
+        var isOver = board.checkGameOver()
+        if (isOver){
+          view.endGame(isOver);
+        }
       } else {
-        console.log("Game Over");
+        view.endGame("tie")
       }
 
     })    
+  }
+
+  var aiTurn = function(){
+
   }
 }

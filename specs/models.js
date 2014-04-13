@@ -48,7 +48,8 @@ describe("Board", function(){
 
     it ("has no cells in the cells container", function() {
       expect(board.cells.length).toEqual(0);
-    });    
+    });  
+
   });
 
   describe("after initializing", function() {
@@ -65,6 +66,29 @@ describe("Board", function(){
 
       expect(cell.number).toEqual(cellNumber);
     })
+
+    it("getEdge returns an emtpy edge when asked for one", function(){
+      expect(board.getEdge().type).toEqual("edge")
+      expect(board.getEdge().getValue()).toEqual("empty")
+    })  
+
+    it("getEdge returns false when no edges are available", function(){
+      board.cells[1].setValue("O")
+      board.cells[3].setValue("O")
+      board.cells[5].setValue("O")
+      board.cells[7].setValue("O")
+  
+      expect(board.getEdge()).toBe(false)
+    }) 
+    
+    it("getCorners returns all corners", function(){
+      var corners = board.getCorners();
+      var randomNum = Math.floor(Math.random() * 4)
+
+      expect(corners.length).toEqual(4);
+      expect(corners[randomNum].type).toEqual("corner");
+    }) 
+
   })
 
 
@@ -113,6 +137,26 @@ describe("Board", function(){
     });
   });
 
+  describe("numberOfCorners", function(){
+    var board;
+    beforeEach(function(){
+      board = new Board();
+      board.initialize();
+      board.cells[0].setValue("X")
+      board.cells[4].setValue("O")
+      board.cells[8].setValue("X")
+    })
+
+    it("returns the proper number of empty corners", function(){
+      expect(board.numberOfEmptyCorners()).toEqual(2);
+    })
+
+    it("returns the proper number of taken corners", function(){
+      expect(board.numberOfTakenCorners()).toEqual(2);
+    })
+
+  })
+
   describe("getCellsWithValue", function(){
     var board = new Board();
     board.initialize();
@@ -125,6 +169,46 @@ describe("Board", function(){
     });
   })
 
+
+  describe("checkGameOver", function(){
+    var board;
+    beforeEach(function(){
+      board = new Board();
+      board.initialize();
+      board.cells[0].setValue("O");
+    })
+
+    it("returns false when there is no winner", function(){
+      expect(board.checkGameOver()).toBe(false);
+    })
+
+    it("returns winner when a row is filled out", function(){
+      board.cells[0].setValue("X");
+      board.cells[1].setValue("X");
+      board.cells[2].setValue("X");
+      var winner = board.checkGameOver();
+
+      expect(winner).toEqual("X");
+    })
+
+    it("returns winner when a col is filled out", function(){
+      board.cells[3].setValue("O");
+      board.cells[6].setValue("O");
+      var winner = board.checkGameOver();
+
+      expect(winner).toEqual("O");
+    })
+
+    it("returns winner when a diagonal is filled out", function(){
+      board.cells[4].setValue("O");
+      board.cells[8].setValue("O");
+      var winner = board.checkGameOver();
+
+      expect(winner).toEqual("O");
+    })
+
+
+  })
 
   
 

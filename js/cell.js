@@ -4,6 +4,7 @@ var Cell = function(number){
   this.row = null;
   this.isDiagonal = false;
   this.diagonal = "";
+  this.type = "";
   var value = "empty";
 
   var self = this;
@@ -12,6 +13,7 @@ var Cell = function(number){
     setColumn();
     setRow();
     checkDiagonal();
+    setType();
   }
 
   this.getValue = function(){
@@ -23,6 +25,17 @@ var Cell = function(number){
   }
 
   // private
+
+  var setType = function(){
+    if (self.number % 2 == 0 && self.column == 2){
+      self.type = "center";
+    } else if (self.number % 2 == 0){
+      self.type = "corner";
+    } else {
+      self.type = "edge"
+    }
+  }
+
   var setColumn = function(){
     self.column = self.number % 3  + 1
   }
@@ -37,6 +50,8 @@ var Cell = function(number){
       self.row = 3;
     }
   }
+
+
 
   var checkDiagonal = function(){
     var sum = self.column + self.row;
@@ -55,9 +70,6 @@ var Cell = function(number){
       self.diagonal = "top-left";
     }
   }
-
-
-
 
 }
 

@@ -10,26 +10,60 @@ var AI = function(board){
     var defending = this.getDefending();
 
     var center = checkCenter();
+
+    var takenCenter = checkTakenCenter();
+
+    var corners = self.checkCorners();
     
     var result = getOther(possibleMoves)
     
     if (winning){
       result = winning;
-console.log("winning")
     } else if(defending){
       result = defending;
-console.log("defending")
     } else if(center){
-      result = center
+      result = center;
+    } else if(takenCenter) {
+      result = takenCenter;
+    }else if (corners){
+      result = corners;
     }
-// // console.log("possible")
-// //       result = possible;
-//     } else {
-//       console.log("Random")
-//     }
 
     return result;
   }
+
+  var checkTakenCenter = function(){
+    var center = board.getCell(4);
+    var corners = board.getCorners();
+    var result = false
+
+    if (center.getValue() == "X" && board.numberOfTakenCorners() <= 2){
+      result = getEmptyCell(corners);
+    }
+
+    return result;
+  }
+
+  this.checkCorners = function(){
+    var result = false;
+    var emptyCorners = board.numberOfEmptyCorners();
+    var takenCorners = board.numberOfTakenCorners();
+
+    if (emptyCorners == takenCorners){
+      result = board.getEdge();
+    }
+
+    return result
+  }
+
+  var getEmptyCell = function(section){
+    var emptyCells = section.filter(function(cell){
+      return (cell.getValue() == "empty")
+    })
+
+    return emptyCells[Math.floor(Math.random() * emptyCells.length)]
+  }
+
 
   var checkCenter = function(){
     var center = board.getCell(4);
@@ -53,56 +87,7 @@ console.log("defending")
     return checkSingled("X", "empty");
   }
 
-  this.getPossible = function(){
-    var cell = checkSingled("empty", "O");
-    if (cell){
-console.log("here")
-      var rowCell  = self.checkRowDoubles(cell.row, "empty", "O");
-      var colCell = self.checkColDoubles(cell.col, "empty", "O");
-      var diag1 = false;
-      var diag2 = false;
-
-      if(cell.diagonal.indexOf("top-left")){
-        var diag1 = self.checkDiagDoubles("top-left", "empty", "O");
-      };
-
-      if(cell.diagonal.indexOf("top-right")){
-        var diag2 = self.checkDiagDoubles("top-right", "empty", "O");
-      };
-
-      var result =  checkPossible(cell, rowCell, colCell, diag1, diag2); 
-    } else {
-      var result = false
-    }
-    return result;
-  }
-
-  var checkPossible = function(cell, rowCell, collCell, diag1, diag2){
-    var result = false;
-    if (cell == rowCell){
-console.log("possible row")
-
-      var row = board.getRowCells(cell.row)
-      result = getCellWithValue(row,"empty");
-    } else if (cell == collCell){
-console.log("possible col")
-
-      var col = board.getColCells(cell.col)
-      result = getCellWithValue(col,"empty");
-    } else if (cell == diag1) {
-console.log("possible diag1")
-
-      var diag = board.getColCells(diag1.diagonal)
-      result = getCellWithValue(diag,"empty");
-    } else if (cell == diag2){
-console.log("possible diag2")
-
-      var diag = board.getColCells(diag2.diagonal)
-      result = getCellWithValue(diag,"empty");
-    }
-    return result;
-  }
-
+  
   var getCellWithValue = function(section, value){
     var result;  
     if (section[0].getValue() == value){
@@ -164,7 +149,6 @@ console.log("possible diag2")
     var row = board.getRowCells(rowNumber);
     var theCell = false;
     var numberOfCells = hasCellsWithValue(row, checkValue);
-console.log("checking row")
     var unique = self.findUnique(row);
     if(numberOfCells == 2 && unique){
       if(desiredValue == unique.getValue()){

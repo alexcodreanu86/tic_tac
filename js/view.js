@@ -10,4 +10,9 @@ var TicTacView = function(){
     $("#" + number).removeClass("active")
   }
 
+  this.endGame = function(winner){
+    $(".active").removeClass("active");
+    
+  }
+
 }

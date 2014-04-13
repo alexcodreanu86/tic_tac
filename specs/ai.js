@@ -49,6 +49,16 @@ describe ("AI", function(){
       var result = ai.checkDiagDoubles("top-right", "O", "empty");
       expect(result).toBe(false);
     });
+
+    it("checkCorners returns an emtpy edge if 2 of the other corners are taken", function(){
+      board.cells[0].setValue("X");
+      board.cells[4].setValue("O");
+      board.cells[8].setValue("X");
+
+      var result = ai.checkCorners();
+
+      expect (result.type).toEqual("edge");
+    })
   })
 
 
@@ -114,13 +124,6 @@ describe ("AI", function(){
 
 
   })
-
-  // describe("Move", function(){
-
-  //   it("", function(){
-
-  //   })    
-  // })
 
 
 
