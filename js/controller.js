@@ -41,7 +41,4 @@ var TicTacController = function(){
     })
   }
 
-  var aiTurn = function(){
-
-  }
 }

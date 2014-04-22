@@ -18,10 +18,6 @@ describe("Cell", function() {
     expect(cell.row).toEqual(3);
   });
 
-  it ("knows if it is in a diagonal", function(){
-    expect(cell.isDiagonal).toBe(true);
-  });
-
   it ("knows what diagonal it is part of", function(){
     expect(cell.diagonal).toEqual("top-right");
   });
@@ -35,4 +31,39 @@ describe("Cell", function() {
     expect(cell.getValue()).toEqual("X");
   })
 
-})
+  describe ("isDiagonal", function(){
+    it ("returns true if it is diagonal", function(){
+      var cell = new Cell(0)
+      cell.initialize();
+      expect(cell.isDiagonal).toBe(true);
+    });
+
+    it ("returns false if it isn't a diagonal", function(){
+      var cell = new Cell(1);
+      cell.initialize();
+      expect(cell.isDiagonal).toBe(false);
+    })
+
+  })
+
+
+  describe("cell type", function(){
+    it ("returns corner type when is initialized as corner", function(){
+      var cell = new Cell(0);
+      cell.initialize();
+      expect(cell.type).toEqual("corner");      
+    });
+
+    it ("returns edge type when is initialized as edge", function(){
+      var cell = new Cell(3);
+      cell.initialize();
+      expect(cell.type).toEqual("edge"); 
+    });
+
+    it ("returns center type when is initialized as center", function(){
+      var cell = new Cell(4);
+      cell.initialize();
+      expect(cell.type).toEqual("center");
+    });
+  });
+});

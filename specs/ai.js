@@ -158,6 +158,22 @@ describe ("AI", function(){
       expect(result.type).toEqual("edge");
     })
 
+    it ("returns a winning cell if it is available", function(){
+      board.cells[0].setValue("O");
+      board.cells[4].setValue("O");
+      var moves = board.getCellsWithValue("empty");
+      var result = ai.move(moves);
+      expect(result.number).toEqual(8);
+    });
+
+    it ("returns a defending cell if it is needed", function(){
+      board.cells[0].setValue("X");
+      board.cells[3].setValue("X");
+      var moves = board.getCellsWithValue("empty");
+      var result = ai.move(moves);
+      expect(result.number).toEqual(6);
+    })
+
   })
 
 
