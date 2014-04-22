@@ -147,6 +147,13 @@ describe ("AI", function(){
       var moves = board.getCellsWithValue("empty");
       var result = ai.move(moves);
       expect(result.type).toEqual("corner");
+    });
+
+    it ("returns a corner if the center is taken by the opponent and at least two corners are available", function(){
+      board.cells[4].setValue("X");
+      var moves = board.getCellsWithValue("empty")
+      var result = ai.move(moves);
+      expect(result.type).toEqual("corner")
     })
 
     it ("returns an edge if two corners and center are taken", function(){
@@ -175,7 +182,4 @@ describe ("AI", function(){
     })
 
   })
-
-
-
 })
