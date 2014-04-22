@@ -6,7 +6,7 @@ var AI = function(board){
   this.move = function(possibleMoves){
     if (this.getWinning()){
       return this.getWinning();
-      
+
     } else if (this.getDefending()){
       return this.getDefending();
 
@@ -34,15 +34,55 @@ var AI = function(board){
     if (cellInEmptySection) {
       var emptySection = getCellEmptySection(cellInEmptySection)
 
-      if (emptySection[2].getValue() == "empty"){
-        result = emptySection[2];
-      } else if(emptySection[1].getValue() == "empty"){
+      if (emptySection[0].getValue() == "empty" && hasOpponentNeighbours(emptySection[0]) != 0){
+        result = emptySection[0];
+      } else if(emptySection[1].getValue() == "empty" && hasOpponentNeighbours(emptySection[1]) != 0){
         result = emptySection[1];
       } else{
-        result = emptySection[0];
+        result = emptySection[2];
       }
     }
     return result
+  }
+
+  var hasOpponentNeighbours = function(cell){
+    return getRowNeighbours(cell) + getColNeighbours(cell);
+  }
+
+  var getRowNeighbours = function(cell){
+    var count = 0;
+    if (cell.row > 1){
+      topNeighbour = board.cells[cell.number - 3]
+      if (topNeighbour.getValue() == "X"){
+        count++
+      }
+    }
+
+    if (cell.row < 3){
+      bottomNeighbour = board.cells[cell.number + 3]
+      if (bottomNeighbour.getValue() == "X"){
+        count++
+      }
+    }
+    return count
+  }
+
+  var getColNeighbours = function(cell){
+    var count = 0;
+    if (cell.column > 1){
+      leftNeighbour = board.cells[cell.number - 1]
+      if (leftNeighbour.getValue() == "X"){
+        count++
+      }
+    }
+
+    if (cell.column < 3){
+      rightNeighbour = board.cells[cell.number + 1]
+      if (rightNeighbour.getValue() == "X"){
+        count++
+      }
+    }
+    return count
   }
 
   var getCellEmptySection = function(cell){
