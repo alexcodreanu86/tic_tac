@@ -121,7 +121,42 @@ describe ("AI", function(){
       var result = ai.getDefending();
       expect(result).toBe(false);
     });
+  })
 
+  describe("move function", function(){
+    var board;
+    var ai;
+
+    beforeEach(function(){
+      board =new Board()
+      board.initialize();
+      ai = new AI(board);
+    });
+
+    it ("returns the center if it is not taken", function(){
+      board.cells[1].setValue("X");
+      var moves = board.getCellsWithValue("empty")
+      var result = ai.move(moves);
+      expect(result.number).toEqual(4);
+    });
+
+    it ("returns a corner if two edges and center are taken", function(){
+      board.cells[1].setValue("X");
+      board.cells[3].setValue("X");
+      board.cells[4].setValue("O");
+      var moves = board.getCellsWithValue("empty");
+      var result = ai.move(moves);
+      expect(result.type).toEqual("corner");
+    })
+
+    it ("returns an edge if two corners and center are taken", function(){
+      board.cells[0].setValue("X");
+      board.cells[8].setValue("X");
+      board.cells[4].setValue("O");
+      var moves = board.getCellsWithValue("empty");
+      var result = ai.move(moves);
+      expect(result.type).toEqual("edge");
+    })
 
   })
 

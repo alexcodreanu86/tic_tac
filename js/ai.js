@@ -50,11 +50,29 @@ var AI = function(board){
     var takenCorners = board.numberOfTakenCorners();
 
     if (emptyCorners == takenCorners){
-      result = board.getEdge();
+      result = board.getEdgeWithValue("empty");
+    } else if(emptyCorners == 4){
+      console.log("here")
+      result = getBlockindCell();
     }
 
     return result
   }
+
+  var getBlockindCell = function(){
+    var takenEdge = board.getEdgeWithValue("X");
+    var edgeCol = board.getColCells(takenEdge.column)
+    var edgeRow = board.getRowCells(takenEdge.row)
+    var blockingDiagonal;
+    if (takenEdge.column == 2){
+      blockingDiagonal = getCellWithValue(edgeRow, "empty")
+    } else {
+      blockingDiagonal = getCellWithValue(edgeCol, "empty")
+    }
+    return blockingDiagonal
+  }
+
+
 
   var getEmptyCell = function(section){
     var emptyCells = section.filter(function(cell){
@@ -63,7 +81,6 @@ var AI = function(board){
 
     return emptyCells[Math.floor(Math.random() * emptyCells.length)]
   }
-
 
   var checkCenter = function(){
     var center = board.getCell(4);
@@ -89,14 +106,13 @@ var AI = function(board){
 
   
   var getCellWithValue = function(section, value){
-    var result;  
-    if (section[0].getValue() == value){
-      result = section[0];
-    } else if(section[1].getValue() == value){
-      result = section[1];
-    } else {
-      result = section[2];
-    }
+    var result; 
+    
+    section.forEach(function(cell){
+      if (cell.getValue() == value){
+        result = cell;
+      }
+    }) 
     return result;
   }
 

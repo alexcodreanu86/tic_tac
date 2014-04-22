@@ -1,5 +1,3 @@
-
-
 var Board = function(){
   this.cells = [];
   var diagonals = ["top-left", "top-right"]
@@ -52,7 +50,6 @@ var Board = function(){
     });
     return neededCells;
   }
-
 
   this.checkGameOver = function(){
     var isOver = checkAllRows(); 
@@ -121,10 +118,10 @@ var Board = function(){
     return corners;
   }
 
-  this.getEdge = function(){
+  this.getEdgeWithValue = function(value){
     var result = false;
     var edges = self.cells.filter(function(cell){
-      return (cell.type == "edge" && cell.getValue() == "empty")
+      return (cell.type == "edge" && cell.getValue() == value)
     })
 
     if(edges[0]){
@@ -133,8 +130,5 @@ var Board = function(){
 
     return result
   }
-
-
-
 }
 
