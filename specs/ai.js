@@ -181,5 +181,23 @@ describe ("AI", function(){
       expect(result.number).toEqual(6);
     })
 
+    it ("returns the an attacking cell", function(){
+      board.cells[1].setValue("X");
+      board.cells[3].setValue("X");
+      board.cells[4].setValue("O")
+      var moves = board.getCellsWithValue("empty");
+      var result = ai.move(moves);
+      expect(result.number).toEqual(0);
+    });
+
+    it ("while attacking, it returns the cell that has more enemy neighbours", function(){
+      board.cells[5].setValue("X");
+      board.cells[7].setValue("X");
+      board.cells[4].setValue("O")
+      var moves = board.getCellsWithValue("empty");
+      var result = ai.move(moves);
+      expect(result.number).toEqual(8);
+    });
+
   })
 })
