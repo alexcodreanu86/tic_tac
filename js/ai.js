@@ -23,7 +23,8 @@ var AI = function(board){
       return this.checkCorners();
 
     } else {
-      return getOther(possibleMoves)
+      console.log("other")
+      return getElementWithMostNeighbours(possibleMoves)
     }
   }
 
@@ -33,16 +34,23 @@ var AI = function(board){
 
     if (cellInEmptySection) {
       var emptySection = getCellEmptySection(cellInEmptySection)
-
-      if (emptySection[0].getValue() == "empty" && hasOpponentNeighbours(emptySection[0]) != 0){
-        result = emptySection[0];
-      } else if(emptySection[1].getValue() == "empty" && hasOpponentNeighbours(emptySection[1]) != 0){
-        result = emptySection[1];
-      } else{
-        result = emptySection[2];
-      }
+      var result = getElementWithMostNeighbours(emptySection);
     }
     return result
+  }
+
+  var getElementWithMostNeighbours = function(section){
+    var theCell = false;
+    var count = 0;
+
+    section.forEach(function(cell){
+      var neighbours = hasOpponentNeighbours(cell);
+      if (cell.getValue() == "empty" && neighbours > count) {
+        theCell = cell;
+        count = neighbours;
+      }
+    })
+    return theCell
   }
 
   var hasOpponentNeighbours = function(cell){
@@ -99,21 +107,30 @@ var AI = function(board){
         topRightDiag = checkForDoubles(board.getDiagonalCells("top-right"), "empty");
       }
     }
-    return checkAttackindSections(cellRow, cellCol, topLeftDiag, topRightDiag, cell);
+    return checkAttackingSections(cellRow, cellCol, topLeftDiag, topRightDiag, cell);
   }
 
-  var checkAttackindSections = function(cellRow, cellCol, topLeftDiag, topRightDiag, cell){
-    var emptyCellSection = false
+  var checkAttackingSections = function(cellRow, cellCol, topLeftDiag, topRightDiag, cell){
+    var emptyCells = []
+
     if (cellRow){
-      emptyCellSection = board.getRowCells(cell.row)
-    } else if (cellCol){
-      emptyCellSection = board.getColCells(cell.column);
-    } else if (topLeftDiag){
-      emptyCellSection = board.getDiagonalCells("top-left");
-    } else if (topRightDiag){
-      emptyCellSection = board.getDiagonalCells("top-right");
+      emptyCells = emptyCells.concat(board.getRowCells(cell.row))
+    } 
+
+    if (cellCol){
+      emptyCells = emptyCells.concat(board.getColCells(cell.column));
+    } 
+
+    if (topLeftDiag){
+      emptyCells = emptyCells.concat(board.getDiagonalCells("top-left"));
     }
-    return emptyCellSection
+
+    if (topRightDiag){
+      emptyCells = emptyCells.concat(board.getDiagonalCells("top-right"));
+    }
+
+    return (emptyCells.length != 0 && emptyCells)
+    
   }
 
   var checkForDoubles = function(section, doubleValue){
@@ -124,12 +141,6 @@ var AI = function(board){
     };
     return result;
   }
-
-
-
-
-
-
 
   var checkTakenCenter = function(){
     var center = board.getCell(4);
@@ -147,7 +158,6 @@ var AI = function(board){
     var result = false;
     var emptyCorners = board.numberOfEmptyCorners();
     var takenCorners = board.numberOfTakenCorners();
-
     if (emptyCorners == takenCorners){
       result = board.getEdgeWithValue("empty");
     } else if(emptyCorners == 4){
@@ -191,11 +201,6 @@ var AI = function(board){
 
   this.getWinning = function(){
     return checkSingled("O", "empty");
-  }
-
-  var getOther = function(container){
-    var index = Math.floor(Math.random() * container.length);
-    return container[index]
   }
 
   this.getDefending = function(){
