@@ -13,17 +13,17 @@ var AI = function(board){
     } else if (checkCenter()){
       return checkCenter();
 
-    }  else if(checkTakenCenter()){
-      console.log("check taken center")
+    } else if(checkTakenCenter()){
       return checkTakenCenter();
-    } else if (this.checkCorners()){
-      console.log("check corners")
-      return this.checkCorners();
+
     } else if (checkAttack()){
       return checkAttack();
-      console.log("check attack")
-    } else {
-      console.log("other")
+
+    } else if (this.checkCorners()){
+
+      return this.checkCorners();
+    }  else {
+
       return getElementWithMostNeighbours(possibleMoves)
     }
   }
