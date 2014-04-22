@@ -50,15 +50,15 @@ describe ("AI", function(){
       expect(result).toBe(false);
     });
 
-    it("checkCorners returns an emtpy edge if 2 of the other corners are taken", function(){
-      board.cells[0].setValue("X");
-      board.cells[4].setValue("O");
-      board.cells[8].setValue("X");
+    // it("checkCorners returns an emtpy edge if 2 of the other corners are taken", function(){
+    //   board.cells[0].setValue("X");
+    //   board.cells[4].setValue("O");
+    //   board.cells[8].setValue("X");
 
-      var result = ai.checkCorners();
+    //   var result = ai.checkCorners();
 
-      expect (result.type).toEqual("edge");
-    })
+    //   expect (result.type).toEqual("edge");
+    // })
   })
 
 
@@ -140,30 +140,30 @@ describe ("AI", function(){
       expect(result.number).toEqual(4);
     });
 
-    it ("returns a corner if two edges and center are taken", function(){
-      board.cells[1].setValue("X");
-      board.cells[3].setValue("X");
-      board.cells[4].setValue("O");
-      var moves = board.getCellsWithValue("empty");
-      var result = ai.move(moves);
-      expect(result.type).toEqual("corner");
-    });
+    // it ("returns a corner if two edges and center are taken", function(){
+    //   board.cells[1].setValue("X");
+    //   board.cells[3].setValue("X");
+    //   board.cells[4].setValue("O");
+    //   var moves = board.getCellsWithValue("empty");
+    //   var result = ai.move(moves);
+    //   expect(result.type).toEqual("corner");
+    // });
 
-    it ("returns a corner if the center is taken by the opponent and at least two corners are available", function(){
-      board.cells[4].setValue("X");
-      var moves = board.getCellsWithValue("empty")
-      var result = ai.move(moves);
-      expect(result.type).toEqual("corner")
-    })
+    // it ("returns a corner if the center is taken by the opponent and at least two corners are available", function(){
+    //   board.cells[4].setValue("X");
+    //   var moves = board.getCellsWithValue("empty")
+    //   var result = ai.move(moves);
+    //   expect(result.type).toEqual("corner")
+    // })
 
-    it ("returns an edge if two corners and center are taken", function(){
-      board.cells[0].setValue("X");
-      board.cells[8].setValue("X");
-      board.cells[4].setValue("O");
-      var moves = board.getCellsWithValue("empty");
-      var result = ai.move(moves);
-      expect(result.type).toEqual("edge");
-    })
+    // it ("returns an edge if two corners and center are taken", function(){
+    //   board.cells[0].setValue("X");
+    //   board.cells[8].setValue("X");
+    //   board.cells[4].setValue("O");
+    //   var moves = board.getCellsWithValue("empty");
+    //   var result = ai.move(moves);
+    //   expect(result.type).toEqual("edge");
+    // })
 
     it ("returns a winning cell if it is available", function(){
       board.cells[0].setValue("O");
