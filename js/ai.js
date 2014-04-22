@@ -11,12 +11,21 @@ var AI = function(board){
       return this.getDefending();
 
     } else if (checkCenter()){
-      console.log("checkCenter")
       return checkCenter();
-    } else {
-      console.log("check attack")
+
+    }  else if(checkTakenCenter()){
+      console.log("check taken center")
+      return checkTakenCenter();
+    } else if (this.checkCorners()){
+      console.log("check corners")
+      return this.checkCorners();
+    } else if (checkAttack()){
       return checkAttack();
-    } 
+      console.log("check attack")
+    } else {
+      console.log("other")
+      return getElementWithMostNeighbours(possibleMoves)
+    }
   }
 
   var checkAttack = function(){
@@ -133,6 +142,54 @@ var AI = function(board){
     return result;
   }
 
+  var checkTakenCenter = function(){
+    var center = board.getCell(4);
+    var corners = board.getCorners();
+    var result = false
+
+    if (center.getValue() == "X" && board.numberOfTakenCorners() <= 2){
+      result = getEmptyCell(corners);
+    }
+
+    return result;
+  }
+
+  this.checkCorners = function(){
+    var result = false;
+    var emptyCorners = board.numberOfEmptyCorners();
+    var takenCorners = board.numberOfTakenCorners();
+    if (emptyCorners == takenCorners){
+      result = board.getEdgeWithValue("empty");
+    } else if(emptyCorners == 4){
+      result = getBlockindCell();
+    }
+
+    return result
+  }
+
+  var getBlockindCell = function(){
+    var takenEdge = board.getEdgeWithValue("X");
+    var edgeCol = board.getColCells(takenEdge.column)
+    var edgeRow = board.getRowCells(takenEdge.row)
+    var blockingDiagonal;
+    if (takenEdge.column == 2){
+      blockingDiagonal = getCellWithValue(edgeRow, "empty")
+    } else {
+      blockingDiagonal = getCellWithValue(edgeCol, "empty")
+    }
+    return blockingDiagonal
+  }
+
+
+
+  var getEmptyCell = function(section){
+    var emptyCells = section.filter(function(cell){
+      return (cell.getValue() == "empty")
+    })
+
+    return emptyCells[Math.floor(Math.random() * emptyCells.length)]
+  }
+
   var checkCenter = function(){
     var center = board.getCell(4);
     var result = false  
@@ -150,6 +207,17 @@ var AI = function(board){
     return checkSingled("X", "empty");
   }
 
+  
+  var getCellWithValue = function(section, value){
+    var result; 
+    
+    section.forEach(function(cell){
+      if (cell.getValue() == value){
+        result = cell;
+      }
+    }) 
+    return result;
+  }
 
   var checkSingled = function(val, desiredValue){ 
     var rowCell = false;
@@ -259,75 +327,3 @@ var AI = function(board){
   };
 
 }
-
-
-// var checkTakenCenter = function(){
-  //   var center = board.getCell(4);
-  //   var corners = board.getCorners();
-  //   var result = false
-
-  //   if (center.getValue() == "X" && board.numberOfTakenCorners() <= 2){
-  //     result = getEmptyCell(corners);
-  //   }
-
-  //   return result;
-  // }
-
-  // this.checkCorners = function(){
-  //   var result = false;
-  //   var emptyCorners = board.numberOfEmptyCorners();
-  //   var takenCorners = board.numberOfTakenCorners();
-  //   if (emptyCorners == takenCorners){
-  //     result = board.getEdgeWithValue("empty");
-  //   } else if(emptyCorners == 4){
-  //     result = getBlockindCell();
-  //   }
-
-  //   return result
-  // }
-
-  // var getBlockindCell = function(){
-  //   var takenEdge = board.getEdgeWithValue("X");
-  //   var edgeCol = board.getColCells(takenEdge.column)
-  //   var edgeRow = board.getRowCells(takenEdge.row)
-  //   var blockingDiagonal;
-  //   if (takenEdge.column == 2){
-  //     blockingDiagonal = getCellWithValue(edgeRow, "empty")
-  //   } else {
-  //     blockingDiagonal = getCellWithValue(edgeCol, "empty")
-  //   }
-  //   return blockingDiagonal
-  // }
-
-
-  // var getEmptyCell = function(section){
-  //   var emptyCells = section.filter(function(cell){
-  //     return (cell.getValue() == "empty")
-  //   })
-
-  //   return emptyCells[Math.floor(Math.random() * emptyCells.length)]
-  // }
-
-
-  // var getCellWithValue = function(section, value){
-  //   var result; 
-    
-  //   section.forEach(function(cell){
-  //     if (cell.getValue() == value){
-  //       result = cell;
-  //     }
-  //   }) 
-  //   return result;
-  // }
-
-  /************************* From inside Move *******************/
-    //  else if(checkTakenCenter()){
-    //   console.log("check taken center")
-    //   return checkTakenCenter();
-    // } else if (this.checkCorners()){
-    //   console.log("check corners")
-    //   return this.checkCorners();
-    //   console.log("other")
-    // } else {
-    //   return getElementWithMostNeighbours(possibleMoves)
-    // }
