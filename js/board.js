@@ -97,16 +97,9 @@ var Board = function(){
     return isOver;
   }
 
-  this.numberOfEmptyCorners = function(){
+  this.numberOfCornersWithValue = function(value){
     var corners = self.cells.filter(function(cell){
-      return (cell.type == "corner" && cell.getValue() == "empty")
-    })
-    return corners.length
-  }
-
-  this.numberOfTakenCorners = function(){
-    var corners = self.cells.filter(function(cell){
-      return (cell.type == "corner" && cell.getValue() != "empty")
+      return (cell.type == "corner" && cell.getValue() == value)
     })
     return corners.length
   }

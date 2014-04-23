@@ -16,13 +16,13 @@ var AI = function(board){
     } else if(checkTakenCenter()){
       return checkTakenCenter();
 
+    } else if (this.checkCorners()){
+      return this.checkCorners();
+
     } else if (checkAttack()){
       return checkAttack();
 
-    } else if (this.checkCorners()){
-
-      return this.checkCorners();
-    }  else {
+    } else {
 
       return getElementWithMostNeighbours(possibleMoves)
     }
@@ -45,7 +45,7 @@ var AI = function(board){
 
     section.forEach(function(cell){
       var neighbours = hasOpponentNeighbours(cell);
-      if (cell.getValue() == "empty" && neighbours > count) {
+      if (cell.getValue() == "empty" && neighbours >= count) {
         theCell = cell;
         count = neighbours;
       }
@@ -62,14 +62,18 @@ var AI = function(board){
     if (cell.row > 1){
       topNeighbour = board.cells[cell.number - 3]
       if (topNeighbour.getValue() == "X"){
-        count++
+        count++;
+      } else if (topNeighbour.getValue() == "O"){
+        count--;
       }
     }
 
     if (cell.row < 3){
       bottomNeighbour = board.cells[cell.number + 3]
       if (bottomNeighbour.getValue() == "X"){
-        count++
+        count++;
+      } else if (bottomNeighbour.getValue() == "O"){
+        count--;
       }
     }
     return count
@@ -81,6 +85,8 @@ var AI = function(board){
       leftNeighbour = board.cells[cell.number - 1]
       if (leftNeighbour.getValue() == "X"){
         count++
+      } else if (leftNeighbour.getValue() == "O"){
+        count--
       }
     }
 
@@ -88,6 +94,8 @@ var AI = function(board){
       rightNeighbour = board.cells[cell.number + 1]
       if (rightNeighbour.getValue() == "X"){
         count++
+      } else if (rightNeighbour.getValue() == "O"){
+        count--
       }
     }
     return count
@@ -147,8 +155,9 @@ var AI = function(board){
     var corners = board.getCorners();
     var result = false
 
-    if (center.getValue() == "X" && board.numberOfTakenCorners() <= 2){
-      result = getEmptyCell(corners);
+    if (center.getValue() == "X" && board.numberOfCornersWithValue("X") <= 2){
+      var emptyCorners = getEmptyCells(corners);
+      result = getElementWithMostNeighbours(emptyCorners)
     }
 
     return result;
@@ -156,8 +165,8 @@ var AI = function(board){
 
   this.checkCorners = function(){
     var result = false;
-    var emptyCorners = board.numberOfEmptyCorners();
-    var takenCorners = board.numberOfTakenCorners();
+    var emptyCorners = board.numberOfCornersWithValue("empty");
+    var takenCorners = board.numberOfCornersWithValue("X");
     if (emptyCorners == takenCorners){
       result = board.getEdgeWithValue("empty");
     } else if(emptyCorners == 4){
@@ -182,12 +191,12 @@ var AI = function(board){
 
 
 
-  var getEmptyCell = function(section){
+  var getEmptyCells = function(section){
     var emptyCells = section.filter(function(cell){
       return (cell.getValue() == "empty")
     })
 
-    return emptyCells[Math.floor(Math.random() * emptyCells.length)]
+    return emptyCells
   }
 
   var checkCenter = function(){

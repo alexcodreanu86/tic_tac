@@ -110,11 +110,11 @@ describe("Board", function(){
     })
 
     it("returns the proper number of empty corners", function(){
-      expect(board.numberOfEmptyCorners()).toEqual(2);
+      expect(board.numberOfCornersWithValue("empty")).toEqual(2);
     })
 
     it("returns the proper number of taken corners", function(){
-      expect(board.numberOfTakenCorners()).toEqual(2);
+      expect(board.numberOfCornersWithValue("X")).toEqual(2);
     })
 
   })
