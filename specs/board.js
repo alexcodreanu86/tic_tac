@@ -1,6 +1,6 @@
 
 describe("Board", function(){
-  
+
   describe("before initializing", function(){
     var board = new Board();
 
@@ -10,7 +10,7 @@ describe("Board", function(){
 
     it ("has no cells in the cells container", function() {
       expect(board.cells.length).toEqual(0);
-    });  
+    });
 
   });
 
@@ -32,27 +32,26 @@ describe("Board", function(){
     it("getEdge returns an emtpy edge when asked for one", function(){
       expect(board.getEdgeWithValue("empty").type).toEqual("edge")
       expect(board.getEdgeWithValue("empty").getValue()).toEqual("empty")
-    })  
+    })
 
     it("getEdge returns false when no edges are available", function(){
       board.cells[1].setValue("O")
       board.cells[3].setValue("O")
       board.cells[5].setValue("O")
       board.cells[7].setValue("O")
-  
+
       expect(board.getEdgeWithValue("empty")).toBe(false)
-    }) 
-    
+    })
+
     it("getCorners returns all corners", function(){
       var corners = board.getCorners();
       var randomNum = Math.floor(Math.random() * 4)
 
       expect(corners.length).toEqual(4);
       expect(corners[randomNum].type).toEqual("corner");
-    }) 
+    })
 
   })
-
 
   describe("getting sections", function(){
     var board;
@@ -68,8 +67,6 @@ describe("Board", function(){
       column = board.getRowCells(randSection);
     });
 
-
-    
     it ("returns the cells of a row", function(){
       expect(row[index].row ==  randSection);
     });
@@ -131,7 +128,6 @@ describe("Board", function(){
     });
   })
 
-
   describe("checkGameOver", function(){
     var board;
     beforeEach(function(){
@@ -168,18 +164,7 @@ describe("Board", function(){
 
       expect(winner).toEqual("O");
     })
-
-
   })
-
-  
-
-
-
-
-
-
-
 })
 
 

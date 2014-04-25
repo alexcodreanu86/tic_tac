@@ -39,7 +39,7 @@ describe("Cell", function() {
     it ("returns true if it is diagonal", function(){
       expect(cell.isDiagonal).toBe(true);
     });
-    
+
     it ("knows what diagonal it is part of", function(){
       expect(cell.diagonal).toEqual("top-right");
       expect(cell2.diagonal).toEqual("top-left");
@@ -53,16 +53,15 @@ describe("Cell", function() {
     });
   })
 
-
   describe("cell type", function(){
     it ("returns corner type when is initialized as corner", function(){
-      expect(cell.type).toEqual("corner");      
+      expect(cell.type).toEqual("corner");
     });
 
     it ("returns edge type when is initialized as edge", function(){
       var cell = new Cell(3);
       cell.initialize();
-      expect(cell.type).toEqual("edge"); 
+      expect(cell.type).toEqual("edge");
     });
 
     it ("returns center type when is initialized as center", function(){
