@@ -1,13 +1,13 @@
 module.exports = function(config) {
   config.set({
-    basePath: '',
+    basePath: 'js/',
     autoWatch: true,
     frameworks: ['jasmine'],
     files: [
-      'sqrt.js',
-      'test/spec/*.js'
+      'board.js',
+      '../test/spec/*.js'
     ],
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
     reporters: ['progress', 'coverage'],
     preprocessors: { '*.js': ['coverage'] },
