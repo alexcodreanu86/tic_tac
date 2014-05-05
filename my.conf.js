@@ -1,17 +1,15 @@
 module.exports = function(config) {
   config.set({
-    basePath: 'js/',
+    basePath: '',
     autoWatch: true,
     frameworks: ['jasmine'],
     files: [
-      'board.js',
-      '../test/spec/*.js'
+      'js/board.js',
+      'test/spec/boardSpec.js'
     ],
     browsers: ['Chrome'],
-
     reporters: ['progress', 'coverage'],
     preprocessors: { '*.js': ['coverage'] },
-
     singleRun: true
   });
 };

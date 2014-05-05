@@ -1,8 +1,13 @@
 function Controller() {
+  var view = new View()
   this.clicked = function(id){
-    console.log("clicked " + id)
-    var element = document.getElementById(id);
-    element.removeAttribute('onclick')
-    element.className = 'cell'
+    view.updateChoice(id, "X")
+    
   }
+
+  this.resetGame = function(){
+    view.resetBoard();
+  }
+
+  
 }
