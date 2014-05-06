@@ -1,6 +1,3 @@
-
-// <script type="text/javascript" src="lib/jasmine-fixture.min.js"></script>
-// <script type="text/javascript" src="lib/jasmine-jquery.js"></script>
 function setUpHTMLFixture() {
   setFixtures('<div id="grid">' 
     + '<div id="0" class="cell active" align="center" onclick="controller.clicked(0)"><i class="fa fa-square-o fa-5x"></i></div>'

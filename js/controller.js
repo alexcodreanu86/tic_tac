@@ -1,13 +1,16 @@
 function Controller() {
-  var view = new View()
+  var view = new View();
+  this.player = new Player("X", false, []);
+  this.cpu = new Player("O", true, []);
+  var self = this;
+
   this.clicked = function(id){
-    view.updateChoice(id, "X")
-    
-  }
+    self.player.setMove(id);
+    view.updateChoice(id, "X");
+  };
 
   this.resetGame = function(){
     view.resetBoard();
-  }
-
-  
+  }; 
 }
+

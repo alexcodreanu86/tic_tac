@@ -41,6 +41,4 @@ describe("View", function(){
       expect(element).toHaveAttr('onclick', 'controller.clicked(' + id + ')')
     })
   })
-
-
 })
