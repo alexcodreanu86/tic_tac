@@ -1,6 +1,7 @@
 describe("Controller", function(){
   var controller;
   var id;
+  
   beforeEach(function(){
     controller = new Controller();
     setUpHTMLFixture();
