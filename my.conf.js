@@ -4,10 +4,13 @@ module.exports = function(config) {
     autoWatch: true,
     frameworks: ['jasmine'],
     files: [
-      'board.js', 'player.js', 'gameState.js',
+      'arrayPrototypes.js',
+      'board.js', 'player.js', 'gameState.js','treeGenerator.js', 
+      '../test/spec/arrayPrototypesSpec.js',
       '../test/spec/boardSpec.js',
       '../test/spec/playerSpec.js',
-      '../test/spec/gameStateSpec.js'
+      '../test/spec/gameStateSpec.js',
+      '../test/spec/treeGeneratorSpec.js'
     ],
     browsers: ['Chrome'],
     reporters: ['progress', 'coverage'],
