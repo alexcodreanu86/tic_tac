@@ -12,7 +12,7 @@ module.exports = function(config) {
     ],
     browsers: ['Chrome'],
     reporters: ['progress', 'coverage'],
-    preprocessors: { '*.js': ['coverage'] },
+    preprocessors: { '*.js': ['coverage'] , '**/*.html': []},
     singleRun: false
   });
 };
