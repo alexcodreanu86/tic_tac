@@ -46,3 +46,15 @@ Array.prototype.max = function(){
   }
   return max;
 }
+
+Array.prototype.equals = function(other){
+  var result = this.length == other.length;
+  if (result){
+    for(var i = 0; i < this.length; i++){
+      if(this[i] != other[i]){
+        result = false;
+      }
+    }
+  }
+  return result;
+}

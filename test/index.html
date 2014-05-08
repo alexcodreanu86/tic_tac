@@ -27,8 +27,6 @@
   <script type="text/javascript" src="../js/arrayPrototypes.js"></script>
   <script type="text/javascript" src="../js/controller.js"></script>
   <script type="text/javascript" src="../js/view.js"></script>
-  <script type="text/javascript" src="../js/player.js"></script>
-  <script type="text/javascript" src="../js/board.js"></script>
   <script type="text/javascript" src="../js/gameState.js"></script>
   <script type="text/javascript" src="../js/treeGenerator.js"></script>
 
@@ -39,6 +37,10 @@
         '<div id="container">'
         + '<div id="marquee">'
           + '<h1>Tic Tac Toe</h1>'
+          + '<ul>'
+            + '<li><button class="player-choice" id="player" onclick="controller.playerToStart(\'human\')">Me</button></li>'
+            + '<li><button class="player-choice" id="cpu" onclick="controller.playerToStart(\'cpu\')">CPU</button></li>'
+          + '</ul>'  
           + '<ul><li><button id="reset" onclick="controller.resetGame()" >Reset</button></li></ul>'
         + '</div>'
         + '<div id="grid">' 
@@ -52,6 +54,7 @@
           + '<div id="7" class="cell active" align="center" onclick="controller.clicked(7)"><i class="fa fa-square-o fa-5x"></i></div>'
           + '<div id="8" class="cell active" align="center" onclick="controller.clicked(8)"><i class="fa fa-square-o fa-5x"></i></div>'
         + '</div>'
+        + '<div id="game-over"></div>'
       + '</div>'
       )
     }
@@ -62,8 +65,6 @@
   <script type="text/javascript" src="spec/arrayPrototypesSpec.js"></script>
   <script type="text/javascript" src="spec/controllerSpec.js"></script>
   <script type="text/javascript" src="spec/viewSpec.js"></script>
-  <script type="text/javascript" src="spec/playerSpec.js"></script>
-  <script type="text/javascript" src="spec/boardSpec.js"></script>
   <script type="text/javascript" src="spec/gameStateSpec.js"></script>
   <script type="text/javascript" src="spec/treeGeneratorSpec.js"></script>
 

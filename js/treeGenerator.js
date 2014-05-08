@@ -1,14 +1,14 @@
 function TreeGenerator(gs){
   this.gameState = gs;
   var self = this;
-  var generateMoves = function(gameState){
-    for(var i = 0; i < gameState.board.length; i ++){
-      var move = gameState.board[i];
+  var generateMoves = function(gameSt){
+    for(var i = 0; i < gameSt.board.length; i++){
+      var move = gameSt.board[i];
       if (move != "X" && move != "O"){
-        var nextBoard = gameState.board.clone();
-        nextBoard[i] = gameState.currentPlayer;
-        nextGameState = new GameState(nextBoard, gameState.nextPlayer());
-        gameState.possibleMoves.push(nextGameState);
+        var nextBoard = gameSt.board.clone();
+        nextBoard[i] = gameSt.currentPlayer;
+        nextGameState = new GameState(nextBoard, gameSt.nextPlayer());
+        gameSt.possibleMoves.push(nextGameState);
         generateMoves(nextGameState);
       };
     };

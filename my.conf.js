@@ -5,10 +5,8 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     files: [
       'arrayPrototypes.js',
-      'board.js', 'player.js', 'gameState.js','treeGenerator.js', 
+      'gameState.js','treeGenerator.js', 
       '../test/spec/arrayPrototypesSpec.js',
-      '../test/spec/boardSpec.js',
-      '../test/spec/playerSpec.js',
       '../test/spec/gameStateSpec.js',
       '../test/spec/treeGeneratorSpec.js'
     ],

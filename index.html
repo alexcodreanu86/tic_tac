@@ -3,24 +3,23 @@
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" href="css/app.css">
-    <!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script> 
-    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="js/cell.js"></script> 
-    <script type="text/javascript" src="js/board.js"></script> 
-    <script type="text/javascript" src="js/ai.js"></script> -->
 
     <script type="text/javascript" src="js/controller.js"></script> 
     <script type="text/javascript" src="js/view.js"></script>
-    <script type="text/javascript" src="js/board.js"></script>
-    <script type="text/javascript" src="js/player.js"></script>
-
+    <script type="text/javascript" src="js/gameState.js"></script>
+    <script type="text/javascript" src="js/treeGenerator.js"></script>
+    <script type="text/javascript" src="js/arrayPrototypes.js"></script>
+    
   </head>
   <body>
     <div id="container">
       <div id="marquee">
         <h1>Tic Tac Toe</h1>
+        <h2>Who should be the one to start?</h2>
+        <ul>
+          <li><button class="player-choice" id="player" onclick="controller.playerToStart('human')">Me</button></li>
+          <li><button class="player-choice" id="cpu" onclick="controller.playerToStart('cpu')">CPU</button></li>
+        </ul>
         <ul>
           <li><button id="reset" onclick="controller.resetGame()">Reset</button></li>
         </ul>

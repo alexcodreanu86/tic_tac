@@ -62,27 +62,53 @@ describe('GameState',function(){
 
   describe('score', function(){
     it("returns 1 if 'X' wins", function(){
-      var gs2 = new GameState(["X", "X", "X", "O", undefined, "O", undefined, undefined, undefined], "O")
-      expect(gs2.score()).toEqual(1);
+      var gs2 = new GameState(["X", "X", "X", "O", undefined, "O", undefined, undefined, undefined], "O");
+      expect(gs2.score(1)).toEqual(9);
     });
 
     it('returns -1 if "O" wins', function(){
-      var gs2 = new GameState(["X", "X", "O", "X", undefined, "O", undefined, undefined, "O"], "O")
-      expect(gs2.score()).toEqual(-1);
+      var gs2 = new GameState(["X", "O", "X", undefined, "O", undefined, undefined,"O", undefined], "O");
+      expect(gs2.score(0)).toEqual(-10);
     })
 
     it('return 0 if nobody won', function(){
       var gs2 = new GameState(["X", "O", "X",
                                "O", "O", "X", 
-                               "X", "X", "O"])
-      expect(gs2.score()).toEqual(0);
+                               "X", "X", "O"], "O");
+      expect(gs2.score(0)).toEqual(0);
     })
 
     it('returns a number even if the game is not over yet', function(){
-      var gs2 = new GameState(["X", "O", "X", undefined, undefined, undefined, undefined, undefined, undefined], "O")
-      var tg = new TreeGenerator(gs2)
-      expect(typeof gs2.score()).toEqual('number')
+      var gs2 = new GameState(["X", "O", "X", undefined, undefined, undefined, undefined, undefined, undefined], "O");
+      var tg = new TreeGenerator(gs2);
+      expect(typeof gs2.score(0)).toEqual('number');
+    });
+  });
+
+  describe("bestCpuMove", function(){
+    it('returns the move that will win the game', function(){
+      var gs2 = new GameState(["X", "O", "X", undefined, "O", undefined, undefined, undefined, undefined], "O");
+      var tg = new TreeGenerator(gs2);
+      expect(gs2.bestCpuMove()).toEqual(7);
+    });
+
+    it('returns the move that will prevent from loosing', function(){
+      var gs2 = new GameState(["X",undefined, "X", undefined, "O", undefined, undefined, undefined, undefined], "O");
+      var tg = new TreeGenerator(gs2);
+      expect(gs2.bestCpuMove()).toEqual(1);
+    });
+
+    it('returns a move from a preset list when board is empty', function(){
+      var move = gs.bestCpuMove();
+      expect([0,2,4,6,8].includes(move)).toBe(true)
     })
 
+    it('returns the last possible move if none are left', function(){
+      var gs2 = new GameState(["X", "O", "X",
+                               "O", undefined, "X", 
+                               "X", "X", "O"], "O" );      
+      var tg = new TreeGenerator(gs2);
+      expect(gs2.bestCpuMove()).toEqual(4);
+    })
   })
 });

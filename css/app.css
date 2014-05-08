@@ -24,3 +24,17 @@
 .fa-square-o {
 	visibility: hidden;
 }
+
+ul li{
+	display: inline-block;
+}
+
+.player-choice{
+	padding: 1em 4em;
+	border-radius: 10px;
+	background: steelblue;
+}
+
+.player-choice:focus{
+	outline: none;
+};

@@ -55,4 +55,18 @@ describe('Array.prototypes', function(){
       expect(arr.max()).toEqual(3);
     })
   })
+
+  describe('equals', function(){
+    it('returns true if the two arrays have same length and same elements in the same order', function(){
+      expect(arr.equals([1,2,3])).toBe(true);
+    })
+
+
+
+    it('returns false if the two arrays are different', function(){
+      expect(arr.equals([1,3,5])).toBe(false)
+      expect(arr.equals([1,3,2])).toBe(false)
+      expect(arr.equals([1,2])).toBe(false)
+    })
+  })
 });

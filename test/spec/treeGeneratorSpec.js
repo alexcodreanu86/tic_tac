@@ -9,4 +9,8 @@ describe("TreeGenerator", function(){
   it('initializes with a game state', function(){
     expect(tg.gameState.board.length).toEqual(9);
   });
+
+  it('generates gameState tree of possible moves', function(){
+    expect(tg.gameState.possibleMoves.length).toEqual(8);
+  })
 });
