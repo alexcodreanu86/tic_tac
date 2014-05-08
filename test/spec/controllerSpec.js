@@ -10,10 +10,11 @@ describe("Controller", function(){
 
   describe("resetGame", function(){
     it("brings game to initial state when reset button is clicked", function(){
-      $('#' + id).trigger('click');
-      $('#reset').trigger('click');
+      document.getElementById(id).onclick();
+      document.getElementById('reset').onclick();
       element = document.getElementById(id);
-      expect(element).toBeMatchedBy('.active');
+      var match = element.className.match('active')
+      expect(match).toBeTruthy();
     });
   });
 
@@ -29,27 +30,27 @@ describe("Controller", function(){
 
   describe('playerToStart', function(){
     it('doesn\'t permit click events on the board before player choice', function(){
-      $('#' + id).trigger('click');
+      document.getElementById(id).onclick()
       var element = document.getElementById(id);
-      expect(element).toBeMatchedBy('.active');
+      var match = element.className.match('active')
+      expect(match).toBeTruthy();
     })
 
     it('triggers computers move when cpu is asked to start', function(){
-      $('#cpu').trigger('click');
-      var element = $(".fa-circle-o");
-      expect(element).toBeMatchedBy(".fa-circle-o");
+      document.getElementById('cpu').onclick()
+      var element = document.getElementsByClassName("fa-circle-o")[0];
+      var match = element.className.match('fa-circle-o')
+      expect(match).toBeTruthy();
     })
   })
 
   describe("clicked", function(){
     beforeEach(function(){
       controller = new Controller();
-      $('#reset').trigger('click');
-      $('#cpu').trigger('click');
-      if (!$('#' + id).attr('onclick')){
-        id = 1;
-      };
-      $('#' + id).trigger('click');
+      document.getElementById('reset').onclick()
+      document.getElementById('cpu').onclick()
+      id = "1";
+      document.getElementById(id).onclick()
     })
 
     it("disables the div that is clicked", function(){
@@ -59,7 +60,8 @@ describe("Controller", function(){
 
     it("updates the clicked div with the X class", function(){
       var element = document.getElementById(id).firstChild;
-      expect(element).toBeMatchedBy('.fa-times');
+      var match = element.className.match('fa-times')
+      expect(match).toBeTruthy();
     });
   })
 })
