@@ -44,11 +44,11 @@ function Controller() {
   }
 
   var isGameOver = function(){
-    if(currentState.isBoardFull()){
-      return 'draw'
-    } else{
-      return currentState.haveWinner()
+    result  = currentState.haveWinner()
+    if (!result && currentState.isBoardFull()){
+      result = 'draw'
     }
+    return result
   }
 
   this.resetGame = function(){
