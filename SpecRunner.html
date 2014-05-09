@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Jasmine Spec Runner v2.0.0</title>
+
+  <link rel="shortcut icon" type="image/png" href="lib/jasmine-2.0.0/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="lib/jasmine-2.0.0/jasmine.css">
+
+  <script type="text/javascript" src="lib/jasmine-2.0.0/jasmine.js"></script>
+  <script type="text/javascript" src="lib/jasmine-2.0.0/jasmine-html.js"></script>
+  <script type="text/javascript" src="lib/jasmine-2.0.0/boot.js"></script>
+  <script type="text/javascript" src="lib/jquery.js"></script>
+  <script type="text/javascript" src="lib/jasmine-fixture.min.js"></script>
+  <script type="text/javascript" src="lib/jasmine-jquery.js"></script>
+  <!--<script type="text/javascript" src="blanket.min.js"></script>
+  <script type="text/javascript" src="jasmine_adapter.js"></script>
+
+  <!-- include source files here... -->
+
+  <script type="text/javascript" src="src/arrayPrototypes.js" data-cover></script>
+  <script type="text/javascript" src="src/controller.js" data-cover></script>
+  <script type="text/javascript" src="src/gameState.js" data-cover></script>
+  <script type="text/javascript" src="src/treeGenerator.js" data-cover></script>
+  <script type="text/javascript" src="src/view.js" data-cover></script>
+  <script type="text/javascript" src="spec/helpers/helpers.js" data-cover></script>
+
+  <!-- fixture -->
+  <script type="text/javascript" src="spec/fixture.js"></script>
+
+  <!-- helpers -->
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="spec/helpersSpec.js"></script>
+  <script type="text/javascript" src="spec/arrayPrototypesSpec.js"></script>
+  <script type="text/javascript" src="spec/controllerSpec.js"></script>
+  <script type="text/javascript" src="spec/gameStateSpec.js"></script>
+  <script type="text/javascript" src="spec/treeGeneratorSpec.js"></script>
+  <script type="text/javascript" src="spec/viewSpec.js"></script>
+
+
+
+  <script type="text/javascript" src="lib/blanket_jasmine.js"></script>
+  <script type="text/javascript">
+     (function() {
+       window.blanketTestJasmineExpected=2;
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+      window.jasmine_phantom_reporter = new jasmine.ConsoleReporter;
+      jasmineEnv.addReporter(jasmine_phantom_reporter);
+    
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+
+        jasmineEnv.execute();
+      }
+
+    })(); 
+  </script>
+
+</head>
+
+<body>
+</body>
+</html>

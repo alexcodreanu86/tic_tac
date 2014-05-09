@@ -1,0 +1,40 @@
+#container{
+	width: 800px;
+	margin: 0 auto;
+}
+	
+#grid {
+	border: 1px solid black;
+	overflow: auto;
+	width: 262px;
+	padding: 3px;
+	background: black;
+}
+
+.cell {
+	width: 80px;
+	height:80px;
+	border: 1px solid black;
+	border-radius: 5px;
+	display: inline-block;
+	margin: 1px;
+	background-color: white;
+}
+
+.fa-square-o {
+	visibility: hidden;
+}
+
+ul li{
+	display: inline-block;
+}
+
+.player-choice{
+	padding: 1em 4em;
+	border-radius: 10px;
+	background: steelblue;
+}
+
+.player-choice:focus{
+	outline: none;
+};
